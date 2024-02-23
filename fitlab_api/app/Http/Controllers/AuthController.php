@@ -1,33 +1,32 @@
 <?php
 
 namespace App\Http\Controllers;
-
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Validator;
 use Symfony\Component\HttpFoundation\Response;
 
 class AuthController extends Controller
 {
     public function store(Request $request)
     {
+        $credentials = $request->only(['email', 'password']);
 
-        $validator = Validator::make($request->all(), [
-            'email' => 'required|string|email',
-            'password' => 'required|string',
+        $request->validate([
+            'email' => 'string|required',
+            'password' => 'string|required'
         ]);
 
-        if ($validator->fails()) {
-            return response()->json(['error' => $validator->errors()], Response::HTTP_BAD_REQUEST);
-        }
+        $authenticated = Auth::attempt($credentials);
 
-        if (!Auth::attempt(['email' => $request->email, 'password' => $request->password])) {
+        if (!$authenticated) return $this->error('Não foi possível realizar a autenticação', Response::HTTP_UNAUTHORIZED);
 
-            return response()->json(['error' => 'Credenciais inválidas'], Response::HTTP_UNAUTHORIZED);
-        }
+        $user = $request->user();
+        $user->tokens()->delete();
+        $token = $user->createToken('token');
 
-        $token = auth()->user()->createToken('authToken')->accessToken->token;
-
-        return response()->json(['token' => $token, 'name' => auth()->user()->name], Response::HTTP_CREATED);
+        return $this->response('Autenticado com sucesso', Response::HTTP_OK, [
+            'token' => $token->plainTextToken,
+            'name' =>  $user->name,
+        ]);
     }
 }
