@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\SupplementController;
 use App\Http\Controllers\StoreController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\UserController;
@@ -9,6 +10,7 @@ Route::middleware('auth:sanctum')->group(function () {
     // rotas privadas
     Route::post('stores', [StoreController::class, 'store']);
     Route::get('stores', [StoreController::class, 'index']);
+    Route::post('supplements', [SupplementController::class, 'store']);
 });
 
 Route::post('users', [UserController::class, 'store']);
