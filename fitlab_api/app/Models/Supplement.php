@@ -17,6 +17,4 @@ class Supplement extends Model
         'type',
     ];
 
-    protected $table = 'supplements';
-
 }

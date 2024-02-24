@@ -30,4 +30,9 @@ class SupplementController extends Controller
 
         return $this->response('Supplement cadastrado com sucesso.', Response::HTTP_CREATED, $supplement);
     }
+    public function index()
+    {
+        $supplements = Supplement::all();
+    return response()->json(['supplements' => $supplements], Response::HTTP_OK);
+    }
 }

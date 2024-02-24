@@ -11,8 +11,9 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::post('stores', [StoreController::class, 'store']);
     Route::get('stores', [StoreController::class, 'index']);
     Route::post('supplements', [SupplementController::class, 'store']);
+    Route::get('supplements', [SupplementController::class, 'index']);
 });
-
+// rotas públicas
 Route::post('users', [UserController::class, 'store']);
 Route::post('login', [AuthController::class, 'store']);
 
