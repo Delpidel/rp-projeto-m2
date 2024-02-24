@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Route;
 Route::middleware('auth:sanctum')->group(function () {
     // rotas privadas
     Route::post('stores', [StoreController::class, 'store']);
+    Route::get('stores', [StoreController::class, 'index']);
 });
 
 Route::post('users', [UserController::class, 'store']);

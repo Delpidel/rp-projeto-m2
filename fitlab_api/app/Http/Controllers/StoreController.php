@@ -33,4 +33,9 @@ class StoreController extends Controller
 
         return response()->json(['store' => $store], Response::HTTP_CREATED);
     }
+    public function index()
+{
+    $stores = Store::all();
+    return response()->json(['stores' => $stores], Response::HTTP_OK);
+}
 }
