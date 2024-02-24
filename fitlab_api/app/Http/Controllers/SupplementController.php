@@ -33,6 +33,16 @@ class SupplementController extends Controller
     public function index()
     {
         $supplements = Supplement::all();
-    return response()->json(['supplements' => $supplements], Response::HTTP_OK);
+        return response()->json(['supplements' => $supplements], Response::HTTP_OK);
+    }
+    public function show($id)
+    {
+        $supplement = Supplement::find($id);
+
+        if (!$supplement) {
+            return $this->error('Supplement not found', Response::HTTP_NOT_FOUND);
+        }
+
+        return response()->json(['supplement' => $supplement], Response::HTTP_OK);
     }
 }

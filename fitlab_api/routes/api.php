@@ -12,6 +12,7 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::get('stores', [StoreController::class, 'index']);
     Route::post('supplements', [SupplementController::class, 'store']);
     Route::get('supplements', [SupplementController::class, 'index']);
+    Route::get('/supplements/{id}', [SupplementController::class, 'show']);
 });
 // rotas públicas
 Route::post('users', [UserController::class, 'store']);
