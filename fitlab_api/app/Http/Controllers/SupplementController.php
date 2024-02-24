@@ -28,7 +28,7 @@ class SupplementController extends Controller
 
         $supplement = Supplement::create($validator->validated());
 
-        return $this->response('Supplement cadastrado com sucesso.', Response::HTTP_CREATED, $supplement);
+        return $this->response('Suplemento cadastrado com sucesso.', Response::HTTP_CREATED, $supplement);
     }
     public function index()
     {
@@ -40,7 +40,7 @@ class SupplementController extends Controller
         $supplement = Supplement::find($id);
 
         if (!$supplement) {
-            return $this->error('Supplement not found', Response::HTTP_NOT_FOUND);
+            return $this->error('Suplemento não encontrado', Response::HTTP_NOT_FOUND);
         }
 
         return response()->json(['supplement' => $supplement], Response::HTTP_OK);
