@@ -9,7 +9,7 @@ use Symfony\Component\HttpFoundation\Response;
 
 class StoreController extends Controller
 {
-     public function store(Request $request)
+    public function store(Request $request)
     {
         $validator = Validator::make($request->all(), [
             'company_name' => 'required|string|max:255',
@@ -34,8 +34,8 @@ class StoreController extends Controller
         return response()->json(['store' => $store], Response::HTTP_CREATED);
     }
     public function index()
-{
-    $stores = Store::all();
-    return response()->json(['stores' => $stores], Response::HTTP_OK);
-}
+    {
+        $stores = Store::all();
+        return response()->json(['stores' => $stores], Response::HTTP_OK);
+    }
 }

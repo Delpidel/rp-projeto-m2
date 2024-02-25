@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
+
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Symfony\Component\HttpFoundation\Response;
@@ -18,7 +19,8 @@ class AuthController extends Controller
 
         $authenticated = Auth::attempt($credentials);
 
-        if (!$authenticated) return $this->error('Não foi possível realizar a autenticação', Response::HTTP_UNAUTHORIZED);
+        if (!$authenticated)
+            return $this->error('Não foi possível realizar a autenticação', Response::HTTP_UNAUTHORIZED);
 
         $user = $request->user();
         $user->tokens()->delete();
